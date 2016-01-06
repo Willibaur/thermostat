@@ -6,8 +6,17 @@ describe('Thermostat', function() {
     thermostat = new Thermostat();
   });
 
-  it('starts at 20 degrees', function() {
-    expect(thermostat.getCurrentTemp()).toEqual(20);
+  describe('sets up default settings', function() {
+    it('initial temperature to 20', function() {
+      expect(thermostat.getCurrentTemp()).toEqual(20);
+    });
+
+    it('power saving mode is on', function() {
+      do {
+        thermostat.increase();
+      } while (thermostat.getCurrentTemp() <= 25);
+      expect(function() { thermostat.increase(); }).toThrowError('Temperature cannot be above 25');
+    });
   });
 
   it('increases temperature by 1 degree', function() {
@@ -29,10 +38,26 @@ describe('Thermostat', function() {
 
   describe('when power saving is', function() {
     it('on, sets maximum temperature to 25', function() {
-      thermostat.powerSavingMode();
+      thermostat.powerSavingModeOn();
       do {
         thermostat.increase();
       } while (thermostat.getCurrentTemp() <= 25);
       expect(function() { thermostat.increase(); }).toThrowError('Temperature cannot be above 25');
+    });
+
+    it('off, sets maximum temperature to 32', function() {
+      thermostat.powerSavingModeOff();
+      do {
+        thermostat.increase();
+      } while (thermostat.getCurrentTemp() <= 32);
+      expect(function() { thermostat.increase(); }).toThrowError('Temperature cannot be above 32');
+    });
+
+    it('resets the temperature to 20', function() {
+      do {
+        thermostat.decrease();
+      } while (thermostat.getCurrentTemp() >= 10);
+      thermostat.resetTemp();
+      expect(thermostat.getCurrentTemp()).toEqual(20);
     });
   });
