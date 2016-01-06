@@ -13,7 +13,7 @@ Thermostat.prototype.increase = function () {
 };
 
 Thermostat.prototype.decrease = function () {
-  if (this.temperature < 10) {
+  if (this.temperature < MINTEMP) {
     throw new Error ('Temperature cannot below 10');
   }
   else {
