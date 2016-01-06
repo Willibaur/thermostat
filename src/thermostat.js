@@ -1,28 +1,33 @@
 function Thermostat() {
-  this.temperature = 20;
+  this.setTemperature();
 }
 
  var MINTEMP = 10;
  var MAXTEMP = 25;
+ var temperature;
+
+  Thermostat.prototype.setTemperature = function () {
+   temperature = 20;
+  };
 
   Thermostat.prototype.getCurrentTemp = function () {
-    return this.temperature;
+    return temperature;
   };
 
   Thermostat.prototype.increase = function () {
-    if (this.temperature > MAXTEMP) {
+    if (temperature > MAXTEMP) {
       throw new Error("Temperature cannot be above " + MAXTEMP);
     } else {
-      this.temperature += 1;
+      temperature += 1;
     }
   };
 
   Thermostat.prototype.decrease = function () {
-    if (this.temperature < MINTEMP) {
+    if (temperature < MINTEMP) {
       throw new Error ('Temperature cannot below 10');
     }
     else {
-      this.temperature -= 1;
+      temperature -= 1;
     }
   };
 
