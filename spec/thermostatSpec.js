@@ -26,3 +26,13 @@ describe('Thermostat', function() {
     } while (thermostat.getCurrentTemp() >= 10);
     expect(function() { thermostat.decrease(); }).toThrowError('Temperature cannot below 10');
   });
+
+  describe('when power saving is', function() {
+    it('on, sets maximum temperature to 25', function() {
+      thermostat.powerSavingMode();
+      do {
+        thermostat.increase();
+      } while (thermostat.getCurrentTemp() <= 25);
+      expect(function() { thermostat.increase(); }).toThrowError('Temperature cannot be above 25');
+    });
+  });
