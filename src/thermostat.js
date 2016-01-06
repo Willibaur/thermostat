@@ -33,3 +33,15 @@ function Thermostat() {
   Thermostat.prototype.powerSavingModeOff = function () {
     MAXTEMP = 32;
   };
+
+  Thermostat.prototype.resetTemp = function () {
+    if (this.getCurrentTemp() > 20 ) {
+      do {
+        this.decrease();
+      } while (this.getCurrentTemp() > 20);
+    } else {
+      do {
+        this.increase();
+      } while (this.getCurrentTemp() < 20);
+    }
+  };

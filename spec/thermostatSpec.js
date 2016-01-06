@@ -19,21 +19,16 @@ describe('Thermostat', function() {
     });
   });
 
-  it('increases temperature by 1 degree', function() {
-    thermostat.increase();
-    expect(thermostat.getCurrentTemp()).toEqual(21);
-  });
+  describe('changes temperature by', function() {
+    it('+1 degree', function() {
+      thermostat.increase();
+      expect(thermostat.getCurrentTemp()).toEqual(21);
+    });
 
-  it('dreceases temperature by 1 degree', function() {
-    thermostat.decrease();
-    expect(thermostat.getCurrentTemp()).toEqual(19);
-  });
-
-  it('prevents to go below 10 degrees', function() {
-    do {
+    it('-1 degree', function() {
       thermostat.decrease();
-    } while (thermostat.getCurrentTemp() >= 10);
-    expect(function() { thermostat.decrease(); }).toThrowError('Temperature cannot below 10');
+      expect(thermostat.getCurrentTemp()).toEqual(19);
+    });
   });
 
   describe('when power saving is', function() {
@@ -52,12 +47,19 @@ describe('Thermostat', function() {
       } while (thermostat.getCurrentTemp() <= 32);
       expect(function() { thermostat.increase(); }).toThrowError('Temperature cannot be above 32');
     });
+  });
 
-    it('resets the temperature to 20', function() {
-      do {
-        thermostat.decrease();
-      } while (thermostat.getCurrentTemp() >= 10);
-      thermostat.resetTemp();
-      expect(thermostat.getCurrentTemp()).toEqual(20);
-    });
+  it('prevents to go below 10 degrees', function() {
+    do {
+      thermostat.decrease();
+    } while (thermostat.getCurrentTemp() >= 10);
+    expect(function() { thermostat.decrease(); }).toThrowError('Temperature cannot below 10');
+  });
+
+  it('resets temperature to 20', function() {
+    do {
+      thermostat.decrease();
+    } while (thermostat.getCurrentTemp() >= 10);
+    thermostat.resetTemp();
+    expect(thermostat.getCurrentTemp()).toEqual(20);
   });
