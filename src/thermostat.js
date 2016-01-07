@@ -1,52 +1,58 @@
 function Thermostat() {
-  this.setTemperature();
+  this.MINTEMP = 10;
+  this.maxTemp = 25;
+  this.temperature = 20;
+  this.powerSavingStatus = 'true';
+  this.colorDisplay = 'yellow';
 }
 
- var MINTEMP = 10;
- var MAXTEMP = 25;
- var temperature;
-
-  Thermostat.prototype.setTemperature = function () {
-   temperature = 20;
-  };
 
   Thermostat.prototype.getCurrentTemp = function () {
-    return temperature;
+    return this.temperature;
   };
 
   Thermostat.prototype.increase = function () {
-    if (temperature > MAXTEMP) {
-      throw new Error("Temperature cannot be above " + MAXTEMP);
+    if (this.temperature > this.maxTemp) {
+      throw new Error("Temperature cannot be above " + this.maxTemp);
     } else {
-      temperature += 1;
+      this.temperature += 1;
     }
   };
 
   Thermostat.prototype.decrease = function () {
-    if (temperature < MINTEMP) {
+    if (this.temperature < this.MINTEMP) {
       throw new Error ('Temperature cannot below 10');
     }
     else {
-      temperature -= 1;
+      this.temperature -= 1;
     }
   };
 
-  Thermostat.prototype.powerSavingModeOn = function () {
-    MAXTEMP = 25;
+  Thermostat.prototype.powerSavingMode = function() {
+    if (this.powerSavingStatus) {
+      this.maxTemp = 32;
+    } else {
+      this.maxTemp = 25;
+    }
+    this.powerSavingStatus = !this.powerSavingStatus;
   };
 
-  Thermostat.prototype.powerSavingModeOff = function () {
-    MAXTEMP = 32;
-  };
 
   Thermostat.prototype.resetTemp = function () {
-    if (this.getCurrentTemp() > 20 ) {
-      do {
-        this.decrease();
-      } while (this.getCurrentTemp() > 20);
+    this.temperature = 20;
+  };
+
+  Thermostat.prototype.setColorDisplay = function () {
+    if (this.getCurrentTemp() < 18 ) {
+      this.colorDisplay = 'green';
+    } else if (this.getCurrentTemp() >= 18 && this.getCurrentTemp() <= 25) {
+      this.colorDisplay = 'yellow';
     } else {
-      do {
-        this.increase();
-      } while (this.getCurrentTemp() < 20);
+      this.colorDisplay = 'red';
     }
+  };
+
+  Thermostat.prototype.getColorDisplay = function () {
+    this.setColorDisplay();
+    return this.colorDisplay;
   };
