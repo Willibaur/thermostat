@@ -7,7 +7,7 @@ describe('Thermostat', function() {
   });
 
   describe('sets up default settings where', function() {
-    it('initial temperature is equals to 20', function() {
+    it('initial temperature is equals to 20 degrees', function() {
       expect(thermostat.getTemp()).toEqual(20);
     });
 
@@ -16,18 +16,18 @@ describe('Thermostat', function() {
     });
   });
 
-  // describe('changes temperature by', function() {
-  //   it('+1 degree', function() {
-  //     thermostat.increaseTemp();
-  //     expect(thermostat.getTemp()).toEqual(21);
-  //   });
-  //
-  //   it('-1 degree', function() {
-  //     thermostat.decrease();
-  //     expect(thermostat.getTemp()).toEqual(19);
-  //   });
-  // });
-  //
+  describe('changes temperature', function() {
+    it('up by 1 degree', function() {
+      thermostat.increaseTemp();
+      expect(thermostat.getTemp()).toEqual(21);
+    });
+
+    it('down by 1 degree', function() {
+      thermostat.decreaseTemp();
+      expect(thermostat.getTemp()).toEqual(19);
+    });
+  });
+
   // describe('when power saving is', function() {
   //   it('on, sets maximum temperature to 25 degrees', function() {
   //     do {
@@ -48,15 +48,15 @@ describe('Thermostat', function() {
   // describe('temperature sensor', function() {
   //   it('cannot be below 10 degrees', function() {
   //     do {
-  //       thermostat.decrease();
+  //       thermostat.decreaseTemp();
   //     } while (thermostat.getTemp() >= 10);
-  //     expect(function() { thermostat.decrease(); }).toThrowError('Temperature cannot below 10');
+  //     expect(function() { thermostat.decreaseTemp(); }).toThrowError('Temperature cannot below 10');
   //   });
   //
   //   describe('can be reset to 20 degrees if', function() {
   //     it('current temperature is < 20 degrees', function() {
   //       do {
-  //         thermostat.decrease();
+  //         thermostat.decreaseTemp();
   //       } while (thermostat.getTemp() >= 10);
   //       thermostat.resetTemp();
   //       expect(thermostat.getTemp()).toEqual(20);
@@ -75,7 +75,7 @@ describe('Thermostat', function() {
   //   describe('displays color', function() {
   //     it('green when temperature < 18 degrees', function() {
   //       do {
-  //         thermostat.decrease();
+  //         thermostat.decreaseTemp();
   //       } while (thermostat.getTemp() > 17);
   //       expect(thermostat.getColorDisplay()).toEqual('green');
   //     });

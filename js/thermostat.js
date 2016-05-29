@@ -32,7 +32,7 @@ Thermostat.prototype.increaseTemp = function() {
   this.temp += 1;
 };
 
-Thermostat.prototype.decreseTemp = function(){
+Thermostat.prototype.decreaseTemp = function(){
   if (this.isMinTemp()) {
     return;
   }
