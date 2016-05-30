@@ -28,23 +28,21 @@ describe('Thermostat', function() {
     });
   });
 
-  // describe('when power saving is', function() {
-  //   it('on, sets maximum temperature to 25 degrees', function() {
-  //     do {
-  //       thermostat.increaseTemp();
-  //     } while (thermostat.getTemp() <= 25);
-  //     expect(function() { thermostat.increaseTemp(); }).toThrowError('Temperature cannot be above 25');
-  //   });
-  //
-  //   it('off, sets maximum temperature to 32 degrees', function() {
-  //     thermostat.powerSavingMode();
-  //     do {
-  //       thermostat.increaseTemp();
-  //     } while (thermostat.getTemp() <= 32);
-  //     expect(function() { thermostat.increaseTemp(); }).toThrowError('Temperature cannot be above 32');
-  //   });
-  // });
-  //
+  describe('when power saving is', function() {
+    it('on, sets maximum temperature to 25 degrees', function() {
+      thermostat.temp = 25;
+      var msg = 'Temperature cannot be above 25';
+      expect(function() { thermostat.increaseTemp(); }).toThrowError(msg);
+    });
+
+    // it('off, sets maximum temperature to 32 degrees', function() {
+    //   thermostat.powerSavingMode();
+    //   thermostat.temp = 32;
+    //   var msg = 'Temperature cannot be above 32';
+    //   expect(function() { thermostat.increaseTemp(); }).toThrowError(msg);
+    // });
+  });
+
   // describe('temperature sensor', function() {
   //   it('cannot be below 10 degrees', function() {
   //     do {

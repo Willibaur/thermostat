@@ -5,6 +5,7 @@ function Thermostat() {
   this.maxTemp_PSM_ON = 25;
   this.maxTemp_PSM_OFF = 32;
   this.MED_ENERGY_USAGE_LIMIT = 18;
+  this.ERROR_MSG = '';
 }
 
 const DEFAULT_TEMP = 20;
@@ -19,16 +20,16 @@ Thermostat.prototype.isMinTemp = function(){
 };
 
 Thermostat.prototype.isMaxTemp = function(){
-  if(this.isPowerSaveOn() === false){
-    return this.temp === this.maxTemp_PSM_OFF;
+  if(this.isPowerSaveOn()){
+    if (this.temp >= this.maxTemp_PSM_ON) {
+      this.ERROR_MSG = "Temperature cannot be above 25";
+      return this.temp >= this.maxTemp_PSM_ON;
+    }
   }
-  return this.temp === this.maxTemp_PSM_ON;
 };
 
 Thermostat.prototype.increaseTemp = function() {
-  if (this.isMaxTemp()){
-    return;
-  }
+  if(this.isMaxTemp()) { throw new Error(this.ERROR_MSG); }
   this.temp += 1;
 };
 
