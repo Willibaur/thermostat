@@ -25,6 +25,11 @@ Thermostat.prototype.isMaxTemp = function(){
       this.ERROR_MSG = "Temperature cannot be above 25";
       return this.temp >= this.maxTemp_PSM_ON;
     }
+  } else {
+    if (this.temp >= this.maxTemp_PSM_OFF) {
+      this.ERROR_MSG = "Temperature cannot be above 32"
+      return this.temp >= this.maxTemp_PSM_OFF;
+    }
   }
 };
 
@@ -42,6 +47,17 @@ Thermostat.prototype.decreaseTemp = function(){
 
 Thermostat.prototype.isPowerSaveOn = function() {
   return this.powerSave === true;
+};
+
+Thermostat.prototype.powerSavingMode = function () {
+  this.powerSave = !this.powerSave;
+
+  if (!this.powerSave) {
+    this.maxTemp = this.maxTemp_PSM_OFF;
+  } else {
+    console.log("test");
+  }
+
 };
 
 Thermostat.prototype.turnPowerSaveOff = function () {

@@ -35,12 +35,12 @@ describe('Thermostat', function() {
       expect(function() { thermostat.increaseTemp(); }).toThrowError(msg);
     });
 
-    // it('off, sets maximum temperature to 32 degrees', function() {
-    //   thermostat.powerSavingMode();
-    //   thermostat.temp = 32;
-    //   var msg = 'Temperature cannot be above 32';
-    //   expect(function() { thermostat.increaseTemp(); }).toThrowError(msg);
-    // });
+    it('off, sets maximum temperature to 32 degrees', function() {
+      thermostat.powerSavingMode();
+      thermostat.temp = 32;
+      var msg = 'Temperature cannot be above 32';
+      expect(function() { thermostat.increaseTemp(); }).toThrowError(msg);
+    });
   });
 
   // describe('temperature sensor', function() {
